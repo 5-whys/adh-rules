@@ -2,10 +2,7 @@
 Adblock home rules for China regions (Mainland China, Hong Kong, Taiwan, Macau Users)
 
 # How to use
-## Just add the links below on your adguard home block list setting. the list will be updated on daily basis
-
-You can find the links of the upstream block lists in the first fews lines of each block rules file
-
+## Just add the links below on your adguard home block list setting. the list will be updated on daily basis, You can find the links of the upstream block lists in the first fews lines of each block rules file
 
 ### Full Block Rules Link: MP-FULL (If you have > 100Mb free memory in your adh server, block all ads / trackers worldwise)
 ---
