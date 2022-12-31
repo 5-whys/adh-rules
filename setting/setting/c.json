@@ -1,9 +1,0 @@
-{
-  "name": "TEMP LIST",
-  "sources": [
-    {
-      "source": "zjc",
-      "transformations": ["RemoveComments", "Compress","Validate", "Deduplicate", "TrimLines","RemoveEmptyLines"]
-    }
-  ]
-}
