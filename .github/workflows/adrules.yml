@@ -5,7 +5,7 @@ on:
   watch:
     types: [started]
   schedule: 
-    - cron: 21 */4 * * *
+    - cron: 21 */3 * * *
 
 jobs:
 
@@ -38,15 +38,32 @@ jobs:
           
     - name: Run main.go
       run: |
+          go run main.go "./setting/super_rules.txt" out_super.txt "./setting/custom.txt"
           go run main.go "./setting/full_rules.txt" out_full.txt "./setting/custom.txt"
           go run main.go "./setting/medium_rules.txt" out_med.txt "./setting/custom.txt"
           go run main.go "./setting/min_rules.txt" out_min.txt "./setting/custom.txt"
     
+    - name: Create output_super.txt
+      run: |
+          line=$(wc -l < out_super.txt)
+          echo "# Title: 5whys SUPER block Adguard Home Rules List (Use with a lot of false rejects)" > output_super.txt
+          echo "# Verison: $(date +%Y%m%d%H%M)" >> output_super.txt
+          echo "# Expires: around 1 day" >> output_super.txt
+          echo "# Total number of rules = $line" >> output_super.txt
+          echo "# Below are the links of the adblock rules" >> output_super.txt
+          while IFS= read -r line; do echo "# $line" >> output_super.txt; done < "./setting/super_rules.txt"
+          echo "####################################################################################" >> output_super.txt
+          cat out_super.txt >> output_super.txt
+          echo "####################################################################################" >> output_super.txt
+
+
     - name: Create output_full.txt
       run: |
+          line=$(wc -l < out_full.txt)
           echo "# Title: 5whys Full block Adguard Home Rules List" > output_full.txt
           echo "# Verison: $(date +%Y%m%d%H%M)" >> output_full.txt
           echo "# Expires: around 1 day" >> output_full.txt
+          echo "# Total number of rules = $line" >> output_full.txt
           echo "# Below are the links of the adblock rules" >> output_full.txt
           while IFS= read -r line; do echo "# $line" >> output_full.txt; done < "./setting/full_rules.txt"
           echo "####################################################################################" >> output_full.txt
@@ -55,9 +72,11 @@ jobs:
           
     - name: Create output_medium.txt
       run: |
+          line=$(wc -l < out_med.txt)
           echo "# Title: 5whys Medium Adguard Home Rules List" > output_medium.txt
           echo "# Verison: $(date +%Y%m%d%H%M)" >> output_medium.txt
           echo "# Expires: around 1 day" >> output_medium.txt
+          echo "# Total number of rules = $line" >> output_medium.txt
           echo "# Below are the links of the adblock rules" >> output_medium.txt
           while IFS= read -r line; do echo "# $line" >> output_medium.txt; done < "./setting/medium_rules.txt"
           echo "####################################################################################" >> output_medium.txt
@@ -66,9 +85,11 @@ jobs:
           
     - name: Create output_min.txt
       run: |
+          line=$(wc -l < out_min.txt)
           echo "# Title: 5whys Min Adguard Home Rules List" > output_min.txt
           echo "# Verison: $(date +%Y%m%d%H%M)" >> output_min.txt
           echo "# Expires: around 1 day" >> output_min.txt
+          echo "# Total number of rules = $line" >> output_min.txt
           echo "# Below are the links of the adblock rules" >> output_min.txt
           while IFS= read -r line; do echo "# $line" >> output_min.txt; done < "./setting/min_rules.txt"
           echo "####################################################################################" >> output_min.txt
