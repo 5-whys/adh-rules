@@ -31,3 +31,13 @@ https://cdn.jsdelivr.net/gh/5-whys/adh-rules@release/output_min.txt (12 hours de
 https://github.com/AdguardTeam/AdGuardHome
 
 (And all upstream filter maintainers for China Regions)
+
+
+--- 
+### P.S. 5whys Super Block Rules Link: 5whys-SUPER 
+
+Not for general use...
+
+https://raw.githubusercontent.com/5-whys/adh-rules/main/rules/output_super.txt
+
+https://cdn.jsdelivr.net/gh/asiaqa/5-whys/adh-rules/output_super.txt (12 hours delay)
