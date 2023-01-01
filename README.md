@@ -41,4 +41,4 @@ Not for general use...
 
 https://raw.githubusercontent.com/5-whys/adh-rules/main/rules/output_super.txt
 
-https://cdn.jsdelivr.net/gh/asiaqa/5-whys/adh-rules/output_super.txt (12 hours delay)
+https://cdn.jsdelivr.net/gh/5-whys/adh-rules/output_super.txt (12 hours delay)
