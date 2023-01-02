@@ -1,7 +1,11 @@
 on:
   workflow_dispatch:
   schedule: 
-    - cron: 21 */4 * * *
+    - cron: 21 8 * * *
+  workflow_run:
+    workflows: ["5whys-Ad-list-processing"]
+    types:
+      - completed
 
 name: ⏫ Sync rule files
 
