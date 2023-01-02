@@ -1,8 +1,5 @@
 on:
   workflow_dispatch:
-  push:
-     branches:
-       - master
   schedule: 
     - cron: 21 */4 * * *
 
