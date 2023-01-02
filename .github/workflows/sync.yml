@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+  push:
+     branches:
+       - master
+  schedule: 
+    - cron: 21 */6 * * *
+
+name: ⏫ Sync rule files
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Copy the 'post' folder
+    - name: Push posts
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'rules/' # Folder to copy
+        destination_repo: '${{ secrets.PATH }}' # Target repo
+        destination_folder: '/' # Folder where to copy it
+        user_email: '${{ secrets.EMAIL }}'
+        user_name: '${{ secrets.NAME }}'
+        commit_message: "SYNC FROM SOURCE"
+        git_server: 'github.com'
