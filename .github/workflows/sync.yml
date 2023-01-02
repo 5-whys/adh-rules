@@ -24,7 +24,7 @@ jobs:
         source_file: 'rules/' # Folder to copy
         destination_repo: '${{ secrets.PATH }}' # Target repo
         destination_folder: '/' # Folder where to copy it
-        user_email: '${{ secrets.EMAIL }}'
-        user_name: '${{ secrets.NAME }}'
+        user_email: '${{ secrets.EMAIL1 }}'
+        user_name: '${{ secrets.NAME1 }}'
         commit_message: "SYNC FROM SOURCE"
         git_server: 'github.com'
