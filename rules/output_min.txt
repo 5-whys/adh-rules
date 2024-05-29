@@ -1,7 +1,7 @@
 # Title: 5whys Min Adguard Home Rules List
-# Verison: 202405292333
+# Verison: 202405300532
 # Expires: around 1 day
-# Total number of rules = 118500
+# Total number of rules = 118525
 # Below are the links of the adblock rules
 # https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
 # https://adaway.org/hosts.txt
@@ -49878,6 +49878,9 @@ inapps.appsflyersdk.com^
 ||int.vaicore.store^
 ||int.vlancaa.site^
 ||int.vlancaa.fun^
+||push-api.topaz-analytics.com^
+||analytics.wildlifestudios.com^
+||opentelemetry-collector.shared-services.us-east-1.general.prod.wildlife.io^
 ||app-analytics-services.com^
 ||sg.log.ulivetv.net^
 ||kr-col-ext.nelo.navercorp.com^
@@ -68944,7 +68947,6 @@ analytics-*.aasaam.com
 ||adsup.togothermany.cn^
 ||apitm.toolmatrix.plus^
 ||playtest-api.topaz-analytics.com^
-||push-api.topaz-analytics.com^
 ||m1.torrenti.al^
 ||s.tpctrust.com^
 ||analytics-listener.trafficmanager.net^
@@ -69234,33 +69236,55 @@ analytics-*.aasaam.com
 .480x60.
 .728x90-
 .900x100.
+||1c7cf19baa.com^
 ||adswizz.com^
+||afiliapub.click^
 ||alipromo.com^
 ||alitems.com^
 ||atdmt.com^
+||atshcaogrlhi.com^
 ||auditude.com^
+||betwinner1.com^
 ||buyeasy.by^
+||cdn-service.com^
 ||chattedhelio.top
+||crvxhuxcel.com^
 ||cusilbwq.xyz
+||dd1xbevqx.com^
+||divinitygasp.com^
+||ethaistoothi.com^
 ||gbpkmltxpcsj.xyz
 ||get-me-wow.
 ||googletagservices.com^
+||h5lwvwj.top^
+||hidingenious.com^
+||holdingholly.space^
 ||hvkwmvpxvjo.xyz
+||iisabujdtg.com^
 ||imasdk.googleapis.com^
+||indeliblehang.pro^
 ||jcufklto.com
+||joannaiodisms.com^
+||jxxnnhdgbfo.xyz^
 ||kqzyfj.com^
+||limbievireos.com^
 ||loadercdn.com^
+||loaptaijuw.com^
 ||ntv.io^
 ||proffering.xyz
+||randomdnslab.com^
 ||rubiconproject.com^
+||simplistic-king.pro^
 ||succeedscene.com^
 ||tedious-weight.pro
 ||totaladblock.com^
 ||tracker-tds.info
 ||trust.zone^
 ||ucationininancee.info
+||ukpdjsailq.com^
 ||videoplaza.tv^
 ||wpnrtnmrewunrtok.xyz^
+||zaudograum.xyz^
 /(https?:\/\/)104\.154\..{100,}/
 /(https?:\/\/)104\.197\..{100,}/
 /(https?:\/\/)104\.198\..{100,}/
@@ -69275,6 +69299,7 @@ analytics-*.aasaam.com
 ||23.109.82.
 ||23.109.87.
 ||mimosaavior.top
+||1wnurc.com^
 ||allsportsflix.
 ||cas.*.criteo.com^
 ||srv.tunefindforfans.com^
