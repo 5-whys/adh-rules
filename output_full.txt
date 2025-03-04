@@ -1,0 +1,101 @@
+# Title: 5whys Full block Adguard Home Rules List
+# Verison: 202503050242
+# Expires: around 1 day
+# Total number of rules = 60
+# Below are the links of the adblock rules
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_24.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_32.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_6.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_7.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_21.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_29.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt
+# https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt
+# https://raw.githubusercontent.com/neodevpro/neodevhost/master/adblocker
+# https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt
+# https://easylist-downloads.adblockplus.org/easylistchina.txt
+# https://easylist-downloads.adblockplus.org/easylist.txt
+# https://easylist-downloads.adblockplus.org/easyprivacy.txt
+# https://raw.githubusercontent.com/Cats-Team/AdRules/main/dns.txt
+# https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV-AGH.txt
+# https://anti-ad.net/easylist.txt
+# https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt
+# https://raw.githubusercontent.com/VeleSila/yhosts/master/hosts.txt
+# https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts
+# https://adaway.org/hosts.txt
+# https://www.i-dont-care-about-cookies.eu/abp/
+# https://filters.adtidy.org/extension/ublock/filters/224.txt
+# https://filter.futa.gg/hosts.txt
+# https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_ads.txt
+# https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_clickthroughs.txt
+# https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_microsites.txt
+# https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_trackers.txt
+# https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/data/combined_disguised_mail_trackers.txt
+# https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+####################################################################################
+||globe-pus.foxitservice.com
+@@||cuhk.au1.qualtrics.com^
+@@||piwik.proxmox.com
+@@||news-app.abumedia.yql.yahoo.com
+||hkchronicles.com^
+||crashdiag.solidworks.com^
+||foxitcloud.com^
+||blockedbyhk.com^
+||foxitservice.com^
+||autoupdate.synology.com
+||update.synology.com
+||payment.synology.com
+||globe-pus.foxitservice.com
+||globe-request.foxitservice.com
+||amazonaax.com^
+||sentry-cdn.com^
+||advice-ads.s3.amazonaws.com^
+||analyticsengine.s3.amazonaws.com^
+amazonaax.com
+analyticsengine.s3.amazonaws.com
+advice-ads.s3.amazonaws.com
+ads.facebook.com
+ads-api.twitter.com
+ads.pinterest.com
+widgets.pinterest.com
+ads.reddit.com
+ads.youtube.com
+doubleclick.net
+ad.doubleclick.net
+static.doubleclick.net
+m.doubleclick.net
+mediavisor.doubleclick.net
+media.fastclick.net
+affiliationjs.s3.amazonaws.com
+advertising-api-eu.amazon.com
+ads.tiktok.com
+||metrics.icloud.com
+adtago.s3.amazonaws.com
+@@||acme.zerossl.com
+@@||ncp-gw-abu.media.yahoo.com
+||ads.pinterest.com
+||ads.tiktok.com
+@@||mirrors.cloud.tencent.com
+||adtago.s3.amazonaws.com^
+metrics.icloud.com
+@@||*.ga^
+@@||*.gq^
+@@||*.cf^
+@@||*.pw^
+@@||*.top^
+@@||*.ml^
+@@||*.loan^
+@@||*.agency^
+@@||*.gdn^
+@@||*.bid^
+@@||*.ooo^
+@@||*.sbs^
+@@||*.discount^
+@@||*.cfd^
+/^[a-z0-9]+-+sn-+[a-z0-9]+-+[a-z0-9]+\.googlevideo\.com$/
+####################################################################################
