@@ -1,7 +1,7 @@
 # Title: 5whys Full block Adguard Home Rules List
-# Verison: 202604301212
+# Verison: 202604301640
 # Expires: around 1 day
-# Total number of rules = 923276
+# Total number of rules = 923301
 # Below are the links of the adblock rules
 # https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
 # https://adguardteam.github.io/HostlistsRegistry/assets/filter_24.txt
@@ -167877,7 +167877,6 @@ analytics-*.aasaam.com
 ||c1.hinta.fi^
 ||c1.ifengimg.com^
 ||c1.microsoft.com^
-||c1.yodo1.com^
 ||c12.adrise.tv^
 ||c1353dile5.riioduwmim.com^
 ||c2fvhdtrk.com^
@@ -186101,7 +186100,6 @@ analytics-*.aasaam.com
 ||sdk-log-upload.mihoyo.com^
 ||sdk-log.partner.sm.cn^
 ||sdk-log.youdao.com^
-||sdk-mas.yodo1.com^
 ||sdk-metrics.postscript.io^
 ||sdk-os-static.hoyoverse.com^
 ||sdk-static.loyaltylion.net^
@@ -848155,8 +848153,33 @@ analytics-*.aasaam.com
 .480x60.
 .728x90-
 .900x100.
+||6zr116wrcjmcy3g86.cfd^
+||anhwasdohccp.com^
+||anonangbiotics.cfd^
+||bruitedaglaoswhelked.cyou^
+||coehornsenile.cyou^
+||enroberbobscudwort.qpon^
+||esiipujna.com^
+||frogletcoccoiddiners.cyou^
 ||get-me-wow.
+||gmfrdnovhdnyuve.com^
 ||gnivhgibkly.com^
+||hugoxwvp.in^
+||intombspyralis.qpon^
+||iydajmurtjjfdb.com^
+||jh374occk4ucnu.rest^
+||joubarbspurlet.shop^
+||jrrqgiblbj.com^
+||lampasliegesbogles.cyou^
+||lobparde.qpon^
+||longvolume.com^
+||lookytimbrel.shop^
+||naskhizeroingmeissa.qpon^
+||oblongstick.pro^
+||pliedhyper.cfd^
+||scalibur.io^
+||sfemzosta.in^
+||wangaracampe.cyou^
 /(https?:\/\/)104\.154\..{100,}/
 /(https?:\/\/)104\.197\..{100,}/
 /(https?:\/\/)104\.198\..{100,}/
@@ -848569,12 +848592,14 @@ analytics-*.aasaam.com
 ||rum*.a.trbcdn.net^
 ||rum*.cdnvideo.ru^
 ||s*.skencituer.com^
+||sberbank.id7629046.one^
 ||sd.yhzzzs*.com^
 ||sdk-*.moengage.com^
 ||sdk.fra-*.braze.eu^
 ||sensorsdata*.read.duokan.com^
 ||servo-report.keepstreams.*^
 ||sock*-goguardian.pusher.com^
+||softgetpc.com^
 ||sonar*.xy.fbcdn.net^
 ||spa-tracker*.spapi.io^
 ||ssp*.rtb.beeline.ru^
@@ -848634,6 +848659,7 @@ analytics-*.aasaam.com
 ||xlog*-*.tiktokv.com^
 ||xy-*pcdn.msstatic.com^
 ||yhsfsdv*.com^
+||yodo1.com^
 ||zabdybod*.club^
 ||zahrvfbd*.xyz^
 ||zaqlovh*.xyz^
@@ -913722,7 +913748,6 @@ nanoGDPR.min.js^
 ||softcatdevmintbestfile.com^
 ||softedu.org^
 ||softflowertrail.com^
-||softgetpc.com^
 ||softgrasslight.com^
 ||softikget.ru^
 ||softkeyget.com^
