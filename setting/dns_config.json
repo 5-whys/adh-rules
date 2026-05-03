@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "workers": 100,
+  "timeout_seconds": 3,
+  "cache_file": "rules/dns_cache.json",
+  "dead_domains_file": "rules/dead_domains.txt",
+  "recheck_after_hours": 24,
+  "use_puredns": true,
+  "puredns_resolvers": "resolvers.txt"
+}

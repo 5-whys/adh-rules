@@ -1,0 +1,44 @@
+# Whitelist - domains that should NEVER be blocked
+# One domain per line (without || or ^)
+# These domains are excluded from dead domain filtering
+# and will always be allowed through
+
+# Google services
+google.com
+googleapis.com
+gstatic.com
+googlevideo.com
+youtube.com
+ytimg.com
+
+# Microsoft services
+microsoft.com
+windowsupdate.com
+live.com
+office.com
+office365.com
+xboxlive.com
+
+# Apple services
+apple.com
+icloud.com
+mzstatic.com
+cdn-apple.com
+
+# CDN providers
+cloudflare.com
+cloudflareinsights.com
+jsdelivr.net
+unpkg.com
+cdnjs.com
+fastly.net
+akamai.net
+akamaiedge.net
+
+# Essential services
+github.com
+githubusercontent.com
+github.io
+stackoverflow.com
+wikipedia.org
+amazonaws.com

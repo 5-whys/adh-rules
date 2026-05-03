@@ -1,0 +1,5 @@
+{
+  "formats": ["txt", "hosts", "dnsmasq", "unbound", "ublock", "domains"],
+  "release_assets": ["txt", "hosts", "dnsmasq"],
+  "tiers": ["super", "full", "medium", "min"]
+}
