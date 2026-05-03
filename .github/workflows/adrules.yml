@@ -1,11 +1,17 @@
 name: 5whys-Ad-list-processing
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   watch:
     types: [started]
-  schedule: 
-    - cron: 21 */3 * * *
+  schedule:
+    - cron: 21 0 * * *
+    - cron: 21 12 * * *
+    - cron: 01 2 * * *
+
+concurrency:
+  group: 5whys-ad-list-processing
+  cancel-in-progress: true
 
 jobs:
 
@@ -13,132 +19,219 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set up Go 1.x.y
-      uses: actions/setup-go@v3
       with:
-        go-version: 1.19
+        fetch-depth: 0
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
         check-latest: true
-        
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '12.x'
     - run: npm install
-      
-    - name: Install hostlist-complier
-      run: npm i -g @adguard/hostlist-compiler@v1.0.35
-        
+
+    - name: Install hostlist-compiler
+      run: |
+        npm i -g @adguard/hostlist-compiler@v1.0.35
+
+    - name: Install puredns and dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential git bc
+        go install github.com/d3mondev/puredns/v2@latest
+
+    - name: Source health check
+      run: |
+        echo "Checking source URLs..."
+        failed=0
+        total=0
+        for file in ./setting/*_rules.txt; do
+          while IFS= read -r url; do
+            url=$(echo "$url" | tr -d '[:space:]')
+            [ -z "$url" ] && continue
+            [[ "$url" == \#* ]] && continue
+            total=$((total + 1))
+            status=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 --max-time 10 "$url" 2>/dev/null || echo "000")
+            if [ "$status" != "200" ]; then
+              echo "FAIL [$status]: $url"
+              failed=$((failed + 1))
+            fi
+          done < "$file"
+        done
+        echo "Health check complete: $((total - failed))/$total sources OK"
+        if [ $failed -gt 0 ]; then
+          echo "WARNING: $failed sources failed health check"
+        fi
+        echo "SOURCE_HEALTH=$((total - failed))/$total" >> $GITHUB_ENV
+
     - name: Set folder condition, variables and timezone
       run: |
-          sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-          echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          rm -f ./out*.txt
-          
-    - name: Run main.go
+        sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+        echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+        rm -f ./out*.txt
+        > ./rules/dead_domains.txt
+
+    - name: Run main.go - Super tier
       run: |
-          go run main.go "./setting/super_rules.txt" out_super.txt "./setting/custom.txt"
-          go run main.go "./setting/full_rules.txt" out_full.txt "./setting/custom.txt"
-          go run main.go "./setting/medium_rules.txt" out_med.txt "./setting/custom.txt"
-          go run main.go "./setting/min_rules.txt" out_min.txt "./setting/custom.txt"
-    
+        go run *.go "./setting/super_rules.txt" out_super.txt "./setting/custom.txt" super
+
+    - name: Run main.go - Full tier
+      run: |
+        go run *.go "./setting/full_rules.txt" out_full.txt "./setting/custom.txt" full
+
+    - name: Run main.go - Medium tier
+      run: |
+        go run *.go "./setting/medium_rules.txt" out_med.txt "./setting/custom.txt" medium
+
+    - name: Run main.go - Min tier
+      run: |
+        go run *.go "./setting/min_rules.txt" out_min.txt "./setting/custom.txt" min
+
     - name: Create output_super.txt
       run: |
-          line=$(wc -l < out_super.txt)
-          echo "# Title: 5whys SUPER block Adguard Home Rules List (Use with a lot of false rejects)" > output_super.txt
-          echo "# Verison: $(date +%Y%m%d%H%M)" >> output_super.txt
-          echo "# Expires: around 1 day" >> output_super.txt
-          echo "# Total number of rules = $line" >> output_super.txt
-          echo "# Below are the links of the adblock rules" >> output_super.txt
-          while IFS= read -r line; do echo "# $line" >> output_super.txt; done < "./setting/super_rules.txt"
-          echo "####################################################################################" >> output_super.txt
-          cat out_super.txt >> output_super.txt
-          echo "####################################################################################" >> output_super.txt
-
+        line=$(wc -l < out_super.txt)
+        echo "# Title: 5whys SUPER block Adguard Home Rules List (Use with own risk)" > output_super.txt
+        echo "# Verison: $(date +%Y%m%d%H%M)" >> output_super.txt
+        echo "# Expires: around 1 day" >> output_super.txt
+        echo "# Total number of rules = $line" >> output_super.txt
+        echo "# Below are the links of the adblock rules" >> output_super.txt
+        while IFS= read -r line; do echo "# $line" >> output_super.txt; done < "./setting/super_rules.txt"
+        echo "####################################################################################" >> output_super.txt
+        cat out_super.txt >> output_super.txt
+        echo "####################################################################################" >> output_super.txt
 
     - name: Create output_full.txt
       run: |
-          line=$(wc -l < out_full.txt)
-          echo "# Title: 5whys Full block Adguard Home Rules List" > output_full.txt
-          echo "# Verison: $(date +%Y%m%d%H%M)" >> output_full.txt
-          echo "# Expires: around 1 day" >> output_full.txt
-          echo "# Total number of rules = $line" >> output_full.txt
-          echo "# Below are the links of the adblock rules" >> output_full.txt
-          while IFS= read -r line; do echo "# $line" >> output_full.txt; done < "./setting/full_rules.txt"
-          echo "####################################################################################" >> output_full.txt
-          cat out_full.txt >> output_full.txt
-          echo "####################################################################################" >> output_full.txt
-          
+        line=$(wc -l < out_full.txt)
+        echo "# Title: 5whys Full block Adguard Home Rules List" > output_full.txt
+        echo "# Verison: $(date +%Y%m%d%H%M)" >> output_full.txt
+        echo "# Expires: around 1 day" >> output_full.txt
+        echo "# Total number of rules = $line" >> output_full.txt
+        echo "# Below are the links of the adblock rules" >> output_full.txt
+        while IFS= read -r line; do echo "# $line" >> output_full.txt; done < "./setting/full_rules.txt"
+        echo "####################################################################################" >> output_full.txt
+        cat out_full.txt >> output_full.txt
+        echo "####################################################################################" >> output_full.txt
+
     - name: Create output_medium.txt
       run: |
-          line=$(wc -l < out_med.txt)
-          echo "# Title: 5whys Medium Adguard Home Rules List" > output_medium.txt
-          echo "# Verison: $(date +%Y%m%d%H%M)" >> output_medium.txt
-          echo "# Expires: around 1 day" >> output_medium.txt
-          echo "# Total number of rules = $line" >> output_medium.txt
-          echo "# Below are the links of the adblock rules" >> output_medium.txt
-          while IFS= read -r line; do echo "# $line" >> output_medium.txt; done < "./setting/medium_rules.txt"
-          echo "####################################################################################" >> output_medium.txt
-          cat out_med.txt >> output_medium.txt
-          echo "####################################################################################" >> output_medium.txt
-          
+        line=$(wc -l < out_med.txt)
+        echo "# Title: 5whys Medium Adguard Home Rules List" > output_medium.txt
+        echo "# Verison: $(date +%Y%m%d%H%M)" >> output_medium.txt
+        echo "# Expires: around 1 day" >> output_medium.txt
+        echo "# Total number of rules = $line" >> output_medium.txt
+        echo "# Below are the links of the adblock rules" >> output_medium.txt
+        while IFS= read -r line; do echo "# $line" >> output_medium.txt; done < "./setting/medium_rules.txt"
+        echo "####################################################################################" >> output_medium.txt
+        cat out_med.txt >> output_medium.txt
+        echo "####################################################################################" >> output_medium.txt
+
     - name: Create output_min.txt
       run: |
-          line=$(wc -l < out_min.txt)
-          echo "# Title: 5whys Min Adguard Home Rules List" > output_min.txt
-          echo "# Verison: $(date +%Y%m%d%H%M)" >> output_min.txt
-          echo "# Expires: around 1 day" >> output_min.txt
-          echo "# Total number of rules = $line" >> output_min.txt
-          echo "# Below are the links of the adblock rules" >> output_min.txt
-          while IFS= read -r line; do echo "# $line" >> output_min.txt; done < "./setting/min_rules.txt"
-          echo "####################################################################################" >> output_min.txt
-          cat out_min.txt  >> output_min.txt
-          echo "####################################################################################" >> output_min.txt
-          
-    - name: move output file
+        line=$(wc -l < out_min.txt)
+        echo "# Title: 5whys Min Adguard Home Rules List" > output_min.txt
+        echo "# Verison: $(date +%Y%m%d%H%M)" >> output_min.txt
+        echo "# Expires: around 1 day" >> output_min.txt
+        echo "# Total number of rules = $line" >> output_min.txt
+        echo "# Below are the links of the adblock rules" >> output_min.txt
+        while IFS= read -r line; do echo "# $line" >> output_min.txt; done < "./setting/min_rules.txt"
+        echo "####################################################################################" >> output_min.txt
+        cat out_min.txt >> output_min.txt
+        echo "####################################################################################" >> output_min.txt
+
+    - name: Update README with rule counts
       run: |
-          mkdir -p ./publish/
-          cp ./output*.txt ./publish/
-          cp ./output*.txt ./rules/
-          
+        super=$(wc -l < out_super.txt | tr -d ' ')
+        full=$(wc -l < out_full.txt | tr -d ' ')
+        medium=$(wc -l < out_med.txt | tr -d ' ')
+        min=$(wc -l < out_min.txt | tr -d ' ')
+        super_fmt=$(echo "scale=0; ${super}/1000" | bc)k
+        full_fmt=$(echo "scale=0; ${full}/1000" | bc)k
+        medium_fmt=$(echo "scale=0; ${medium}/1000" | bc)k
+        min_fmt=$(echo "scale=0; ${min}/1000" | bc)k
+        sed -i 's/\*\*Super\*\* ([0-9]*k)/\*\*Super\*\* ({{SUPER_COUNT}})/g' README.md
+        sed -i 's/\*\*Full\*\* ([0-9]*k)/\*\*Full\*\* ({{FULL_COUNT}})/g' README.md
+        sed -i 's/\*\*Medium\*\* ([0-9]*k)/\*\*Medium\*\* ({{MEDIUM_COUNT}})/g' README.md
+        sed -i 's/\*\*Min\*\* ([0-9]*k)/\*\*Min\*\* ({{MIN_COUNT}})/g' README.md
+        sed -i "s/{{SUPER_COUNT}}/${super_fmt}/g" README.md
+        sed -i "s/{{FULL_COUNT}}/${full_fmt}/g" README.md
+        sed -i "s/{{MEDIUM_COUNT}}/${medium_fmt}/g" README.md
+        sed -i "s/{{MIN_COUNT}}/${min_fmt}/g" README.md
+        echo "SUPER_COUNT=${super_fmt}" >> $GITHUB_ENV
+        echo "FULL_COUNT=${full_fmt}" >> $GITHUB_ENV
+        echo "MEDIUM_COUNT=${medium_fmt}" >> $GITHUB_ENV
+        echo "MIN_COUNT=${min_fmt}" >> $GITHUB_ENV
+        echo "Rule counts: Super=${super_fmt}, Full=${full_fmt}, Medium=${medium_fmt}, Min=${min_fmt}"
+
+    - name: Rule count tracking
+      run: |
+        super=$(wc -l < out_super.txt | tr -d ' ')
+        full=$(wc -l < out_full.txt | tr -d ' ')
+        medium=$(wc -l < out_med.txt | tr -d ' ')
+        min=$(wc -l < out_min.txt | tr -d ' ')
+        timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        if [ -f ./rules/rule_counts.json ]; then
+          cp ./rules/rule_counts.json ./rules/rule_counts.json.bak
+        fi
+        echo "{\"timestamp\":\"${timestamp}\",\"super\":${super},\"full\":${full},\"medium\":${medium},\"min\":${min}}" >> ./rules/rule_counts.json
+        echo "Rule counts tracked: Super=${super}, Full=${full}, Medium=${medium}, Min=${min}"
+
+    - name: Move output files
+      run: |
+        mkdir -p ./publish/
+        cp ./output*.txt ./publish/
+        cp ./output*.txt ./rules/
+
+    - name: Commit *.txt
+      run: |
+        echo "$(date +"%Y-%m-%d %H:%M:%S") ZJC CKC Super=$(wc -l < ./output_super.txt | tr -d ' ') Full=$(wc -l < ./output_full.txt | tr -d ' ') Medium=$(wc -l < ./output_medium.txt | tr -d ' ') Min=$(wc -l < ./output_min.txt | tr -d ' ')" >> ./rules/date.log
+        git config --global user.email ${{ secrets.EMAIL }}
+        git config --global user.name ${{ secrets.NAME }}
+        git add ./rules/output* ./rules/date.log ./rules/dead_domains.txt ./rules/dns_cache.json ./resolvers.txt ./rules/rule_counts.json README.md
+        git commit -m "${{ env.RELEASE_NAME }} | Super: ${{ env.SUPER_COUNT }} | Full: ${{ env.FULL_COUNT }} | Medium: ${{ env.MEDIUM_COUNT }} | Min: ${{ env.MIN_COUNT }} | Health: ${{ env.SOURCE_HEALTH }}"
+        git push
+
     - name: Release and upload assets
       uses: softprops/action-gh-release@v0.1.6
       with:
-          name: ${{ env.RELEASE_NAME }}
-          tag_name: ${{ env.TAG_NAME }}
-          draft: false
-          prerelease: false
-          files: |
-            ./publish/*
+        name: ${{ env.RELEASE_NAME }}
+        tag_name: ${{ env.TAG_NAME }}
+        draft: false
+        prerelease: false
+        body: |
+          ## Rule Counts
+          - Super: ${{ env.SUPER_COUNT }}
+          - Full: ${{ env.FULL_COUNT }}
+          - Medium: ${{ env.MEDIUM_COUNT }}
+          - Min: ${{ env.MIN_COUNT }}
+
+          ## Source Health
+          ${{ env.SOURCE_HEALTH }}
+        files: |
+          ./publish/*
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Git push assets to "release" branch
       run: |
-          cd publish || exit 1
-          git init
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "121651775+github-actions[bot]@users.noreply.github.com"
-          git checkout -b release
-          git add .
-          git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u origin release
+        cd publish || exit 1
+        git init
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "121651775+github-actions[bot]@users.noreply.github.com"
+        git checkout -b release
+        git add .
+        git commit -m "${{ env.RELEASE_NAME }}"
+        git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+        git push -f -u origin release
 
     - name: Purge jsdelivr CDN
       run: |
-          cd publish || exit 1
-          for file in $(ls); do
-            curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
-          done
-    
-    - name: Commit *.txt
-      run: |
-         echo `date +"%Y-%m-%d %H:%M:%S"` ZJC CKC >> ./rules/date.log
-         git config --global user.email ${{ secrets.EMAIL }}
-         git config --global user.name ${{ secrets.NAME }}
-         git add ./rules/output* ./rules/date.log
-         git commit -m "${{ env.RELEASE_NAME }}"
-         git push
-
+        cd publish || exit 1
+        for file in $(ls); do
+          curl -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/${file}"
+        done
