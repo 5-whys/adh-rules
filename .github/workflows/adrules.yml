@@ -22,6 +22,15 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Restore DNS cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          rules/dns_cache.json
+          resolvers.txt
+        key: dns-cache-${{ github.run_number }}
+        restore-keys: dns-cache-
+
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
@@ -192,7 +201,7 @@ jobs:
         echo "$(date +"%Y-%m-%d %H:%M:%S") ZJC CKC Super=$(wc -l < ./output_super.txt | tr -d ' ') Full=$(wc -l < ./output_full.txt | tr -d ' ') Medium=$(wc -l < ./output_medium.txt | tr -d ' ') Min=$(wc -l < ./output_min.txt | tr -d ' ')" >> ./rules/date.log
         git config --global user.email ${{ secrets.EMAIL }}
         git config --global user.name ${{ secrets.NAME }}
-        git add ./rules/output* ./rules/date.log ./rules/dead_domains.txt ./rules/dns_cache.json ./resolvers.txt ./rules/rule_counts.json README.md
+        git add ./rules/output* ./rules/date.log ./rules/dead_domains.txt ./rules/rule_counts.json README.md
         git commit -m "${{ env.RELEASE_NAME }} | Super: ${{ env.SUPER_COUNT }} | Full: ${{ env.FULL_COUNT }} | Medium: ${{ env.MEDIUM_COUNT }} | Min: ${{ env.MIN_COUNT }} | Health: ${{ env.SOURCE_HEALTH }}"
         git push
 
