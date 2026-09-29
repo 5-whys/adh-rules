@@ -1,7 +1,7 @@
 # Title: 5whys Medium uBlock Origin Format Rules List
-# Version: 202609291408
+# Version: 202609291608
 # Expires: around 1 day
-# Total number of rules = 316014
+# Total number of rules = 316028
 # Below are the links of the adblock rules
 # https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
 # https://adaway.org/hosts.txt
@@ -36,6 +36,7 @@
 # https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/multi.txt
 # https://raw.githubusercontent.com/Turtlecute33/toolz/refs/heads/master/src/d3host.adblock
 ####################################################################################
+||ardance.org^
 ||engine.camconnections.live^
 ||nicelymodulo.com^
 ||rapidfire.cc^
@@ -7696,6 +7697,8 @@
 ||xad.dnoticias.pt^
 ||adv.r7.com^
 ||tagman.britishairways.com^
+||hits.letras.mus.br^
+||tracking.dpmlol.com^
 ||beam.telegram.hr^
 ||tracker.telegram.hr^
 ||campaign.telegram.hr^
@@ -108976,6 +108979,7 @@
 ||axisedswindle.qpon^
 ||axjndvucr.com^
 ||axkojdfhek.com^
+||axlqjrhsczvfw.site^
 ||axojwdxauwpaa.online^
 ||axolotlly.com^
 ||axonix.com^
@@ -109501,6 +109505,7 @@
 ||bf80c2fe1a.com^
 ||bfakfxslixdbx.site^
 ||bfast.com^
+||bfatejqxzleqa.site^
 ||bfaubcoezrihe.site^
 ||bfblyaqvcnaat.space^
 ||bfetpjdaebmzl.space^
@@ -116997,6 +117002,7 @@
 ||gukogwaqmfik.in^
 ||gukzebkckkvxv.website^
 ||gulioamsivgik.site^
+||gulliedolor.cfd^
 ||gullsupbank.cfd^
 ||gulpedcountwhipped.com^
 ||gulpersgup.qpon^
@@ -118371,6 +118377,7 @@
 ||ifdbdp.com^
 ||ifdnzact.com^
 ||ifigent.com^
+||ifjqdbuypcfyb.space^
 ||iflfnermnmnhj.space^
 ||ifmazzwntwnwg.site^
 ||ifngekdnxqygk.site^
@@ -120693,6 +120700,7 @@
 ||kuffobduumzwl.space^
 ||kufvqdstaemar.site^
 ||kugeshuffle.com^
+||kugqwiarq.in^
 ||kujifkvgkygii.site^
 ||kukupareceder.cyou^
 ||kukyzzgcbrwdl.online^
@@ -128462,6 +128470,7 @@
 ||rigkqvfvsfevc.site^
 ||rihbxnftttvlp.website^
 ||rihhfqeqwimni.website^
+||rihnruzrgufav.space^
 ||rihurxgrxghfh.online^
 ||rikishatasajo.qpon^
 ||rilnkygbfbvru.site^
@@ -128472,6 +128481,7 @@
 ||ringeddrama.com^
 ||ringtonepartner.com^
 ||rinqgwqhyxozh.website^
+||rinsersdisarm.cfd^
 ||ripagitateway.com^
 ||ripe-heart.com^
 ||ripengerm.com^
@@ -130996,6 +131006,7 @@
 ||suiteenvelopetyran.com^
 ||sujgsrsppqoij.site^
 ||sujisandkey.qpon^
+||sukeypongee.cfd^
 ||sukjdmsazsmuw.space^
 ||sukkahsingan.shop^
 ||sukmdrkbkegsx.space^
@@ -133779,6 +133790,7 @@
 ||vblwixpwrrrjh.site^
 ||vbmxorkseftlr.online^
 ||vbnritbsiqqar.online^
+||vbookziyzfrfn.space^
 ||vbs-protect.pro^
 ||vbtpkdvezdeoo.site^
 ||vbtrax.com^
@@ -135768,6 +135780,7 @@
 ||xhklrsxyhlcfr.site^
 ||xhmeoqeoeurjk.store^
 ||xhmewlkjkvump.online^
+||xhmigokzqygkk.space^
 ||xhmyevcqcasdf.site^
 ||xhnouqnhyhohr.online^
 ||xhnqhtqrnhurx.site^
@@ -136896,6 +136909,7 @@
 ||zaxxigefrdixn.online^
 ||zazlluqbstvzk.website^
 ||zbbuttbhoybvc.space^
+||zbcnfjuttikis.online^
 ||zbevofrechbto.space^
 ||zbhblutftghug.site^
 ||zbkrmwrzftiav.site^
@@ -137173,6 +137187,7 @@
 ||zmaehtvocezof.space^
 ||zmahxlcxkasov.website^
 ||zmamhuakbbu.com^
+||zmblesusfxzxe.site^
 ||zmbulblwjgxfe.space^
 ||zmcotfbwooimx.space^
 ||zmdesf.cn^
@@ -137190,6 +137205,7 @@
 ||znbkeybfqmeub.space^
 ||zngkzslgifgon.space^
 ||znigpcayzsxyp.site^
+||znivolyayyfxg.space^
 ||znizlnbamkeod.site^
 ||znjvedmtgybbk.store^
 ||znlmhgpgcjxmr.site^
@@ -140316,6 +140332,8 @@
 ||ltdzz.com^
 ||hweianpqxl.icu^
 ||s6cfki4v4.com^
+||qxbpi331k.com^
+||5n131lck8.com^
 ||qs2zdat2pi.com^
 ||xhhgjfpswovlvg.com^
 ||6ign0q6xb1.com^
@@ -151348,29 +151366,27 @@
 ||ziffdavis.com^
 ||static.ziftsolutions.com^
 ||s.zkcdn.net^
-||qxbpi331k.com^
-||5n131lck8.com^
+||s7jkxkm72.com^
 ||bdad.123pan.cn^
 ||alipromo.com^
 ||alitems.com^
-||bfatejqxzleqa.site^
+||bozvcohnsbhgk.website^
 ||buyeasy.by^
-||gulliedolor.cfd^
-||ifjqdbuypcfyb.space^
+||cbayjvkbxwmki.site^
+||fjtpqjyqhmepm.online^
 ||imasdk.googleapis.com^
+||lcqncipmxvelsw.com^
 ||loadercdn.com^
 ||monetag.com^
+||oducnyesnjykf.space^
 ||ojrq.net^
 ||redirectingat.com^
-||rihnruzrgufav.space^
 ||rubiconproject.com^
-||sukeypongee.cfd^
+||thcgdpqoxar.com^
 ||totaladblock.com^
-||vbookziyzfrfn.space^
 ||wpnrtnmrewunrtok.xyz^
-||xhmigokzqygkk.space^
-||zbcnfjuttikis.online^
-||zmblesusfxzxe.site^
+||xjdfubwlgothk.site^
+||zirxajjgiolaj.online^
 ||html-load.cc^
 ||srv.tunefindforfans.com^
 ||smartclip.com^
@@ -157393,7 +157409,6 @@
 ||g.bit.pt^
 ||g.bitmag.com.br^
 ||geoip.ativo.com^
-||hits.letras.mus.br^
 ||log-ads.r7.com^
 ||logger.rm.uol.com.br^
 ||logger.uol.com.br^
@@ -277562,7 +277577,6 @@
 ||arcticalimited.com^
 ||arcticlobe.com^
 ||arcushealthclub.com^
-||ardance.org^
 ||ardatlom.com^
 ||arded.com^
 ||ardenodemedia.com^
